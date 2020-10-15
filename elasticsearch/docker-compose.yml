@@ -1,0 +1,21 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.9.2
+    container_name: elasticsearch
+    environment:
+     discovery.type: single-node
+  logstash:
+    image: logstash:7.9.2
+    ports:
+      - 127.0.0.1:5959:5959/udp
+    user: root
+    volumes:
+      - ./pipeline/:/usr/share/logstash/pipeline/
+      - ./log/:/usr/share/logstash/log
+    depends_on:
+      - elasticsearch
+  elasticsearch-hq:
+    image: elastichq/elasticsearch-hq
+    ports:
+      - 127.0.0.1:5000:5000

@@ -1,8 +1,0 @@
-version: "3"
-services:
-  logstash:
-    image: logstash:7.9.2
-    ports:
-      - "127.0.0.1:5000:5000/udp"
-    volumes:
-      - ./pipeline/:/usr/share/logstash/pipeline/
