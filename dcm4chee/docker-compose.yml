@@ -45,7 +45,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./dcm4chee-arc/logstash/filter-hashtree:/usr/share/logstash/data/filter-hashtree
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.50-22.5
+    image: dcm4che/slapd-dcm4chee:2.4.50-22.6
     logging:
       driver: gelf
       options:
@@ -129,7 +129,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.22.5-secure
+    image: dcm4che/dcm4chee-arc-psql:5.22.6-secure
     logging:
       driver: gelf
       options:
@@ -150,6 +150,7 @@ services:
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
       #KEYSTORE: /keystores/key.jks
       #TRUSTSTORE: /keystores/cacerts.jks
+      #TRUSTSTORE_PASSWORD: 'secret'
     depends_on:
       - ldap
       - keycloak
